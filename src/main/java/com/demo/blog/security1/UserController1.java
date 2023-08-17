@@ -20,13 +20,13 @@ public class UserController1 {
         return "Welcome";
     }
 
-    @GetMapping("admin")
+    @GetMapping("/admin")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String getAdmin(){
         return "Hi Admin, you have been authenticated successfully";
     }
 
-    @GetMapping("user")
+    @GetMapping("/user")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     public String getUser(){
         return "Hi User, you have loggined successfully";

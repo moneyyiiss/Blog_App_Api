@@ -12,13 +12,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class UserInfoUserDetails implements UserDetails {
 
 
-    private String name;
+    private String username;
     private String password;
     List<GrantedAuthority> authorities;
 
     public UserInfoUserDetails(UserInfo userInfo){
-        name = userInfo.getName();
-        password = userInfo.getPassword();
+        this.username = userInfo.getName();
+        this.password = userInfo.getPassword();
         //not cool method - old method to do this.
         String roles = userInfo.getRoles();
         String[] rolesArray = roles.split(",");
@@ -30,42 +30,51 @@ public class UserInfoUserDetails implements UserDetails {
 
     }
 
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		
+		return authorities;
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return this.password;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return this.username;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 
 
 
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
 
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return null;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
 }

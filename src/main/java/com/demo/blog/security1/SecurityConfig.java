@@ -26,9 +26,11 @@ public class SecurityConfig {
     }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
-        return httpSecurity.csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(a -> a.requestMatchers("home/welcome" , "home/user/add" , "/" , "/signup" , "/about").permitAll())
-                .authorizeHttpRequests(a -> a.requestMatchers("home/**").authenticated())
+        return httpSecurity
+        		.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(a -> a.requestMatchers("home/welcome" , "home/user/add").permitAll())
+                .authorizeHttpRequests(a -> a.requestMatchers("home/**")
+                		.authenticated())
                 .formLogin(f -> f.permitAll()).build();
     }
     @Bean
